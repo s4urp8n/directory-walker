@@ -15,6 +15,8 @@ $path=DirectoryWalker::fromCurrent()
 ?>
 ```
 
+[Documentation](https://s4urp8n.github.io/directory-walker/index.html)
+
 ```
 
 Code Coverage Report:     
