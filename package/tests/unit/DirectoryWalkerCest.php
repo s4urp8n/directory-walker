@@ -44,7 +44,7 @@ class DirectoryWalkerCest
                 {
                     return DirectoryWalker::fromCurrent()
                                           ->up(2)
-                                          ->enter('\\\\/////tests\\\\///////unit///\\\\')
+                                          ->enter('\\\\/////tests\\\\///////unit///\\\\/')
                                           ->get();
                 },
                 __DIR__ . DIRECTORY_SEPARATOR,
