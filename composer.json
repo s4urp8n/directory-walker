@@ -1,0 +1,26 @@
+{
+  "name": "zver/directory-walker",
+  "description": "Directory path walker helper",
+  "minimum-stability": "stable",
+  "config": {
+    "optimize-autoloader": true
+  },
+  "autoload": {
+    "psr-4": {
+      "": "package/src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "": "package/tests/"
+    }
+  },
+  "require": {
+    "zver/autoloader": "^1.0",
+    "zver/string-helper": "^1.0",
+    "zver/array-helper": "^1.0"
+  },
+  "require-dev": {
+
+  }
+}
