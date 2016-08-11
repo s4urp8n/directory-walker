@@ -69,10 +69,6 @@ namespace Zver
             {
                 $path .= $directorySeparator . implode($directorySeparator, $this->path);
             }
-            else
-            {
-                $path .= $directorySeparator;
-            }
             
             return realpath($path) . $directorySeparator;
         }
