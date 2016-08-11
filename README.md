@@ -18,13 +18,13 @@ $path=DirectoryWalker::fromCurrent()
 ```
 
 Code Coverage Report:     
-  2016-08-11 22:58:15     
+  2016-08-11 23:56:03     
                           
  Summary:                 
-  Classes: 100.00% (1/1)  
-  Methods: 100.00% (6/6)  
-  Lines:   100.00% (29/29)
+  Classes: 100.00% (2/2)  
+  Methods: 100.00% (8/8)  
+  Lines:   100.00% (48/48)
 
 \Zver::DirectoryWalker
-  Methods: 100.00% ( 6/ 6)   Lines: 100.00% ( 29/ 29)
+  Methods: 100.00% ( 8/ 8)   Lines: 100.00% ( 48/ 48)
 ```
