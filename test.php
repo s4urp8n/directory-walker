@@ -83,7 +83,7 @@ $commands = [
                 passthru($testCommand, $acceptanceResult);
             }
             
-            $testCommand = 'php codecept.phar run unit --steps --coverage-xml --coverage-html --coverage-text --coverage';
+            $testCommand = 'php codecept.phar run unit --coverage-xml --coverage-html --coverage-text --coverage';
             passthru($testCommand, $testResult);
             
             if (PackageTemplate\isPagesExists())

@@ -72,5 +72,47 @@ namespace Zver
             
             return realpath($path) . $directorySeparator;
         }
+        
+        public function includeFile($file, $throw = false)
+        {
+            $path = $this->get() . $file;
+            
+            if (file_exists($path))
+            {
+                include_once "$path";
+            }
+            else
+            {
+                if ($throw)
+                {
+                    throw new Exceptions\DirectoryWalker\FileNotFoundException(
+                        'File not found for include "' . $path . '"'
+                    );
+                }
+            }
+            
+            return $this;
+        }
+        
+        public function requireFile($file, $throw = false)
+        {
+            $path = $this->get() . $file;
+            
+            if (file_exists($path))
+            {
+                require_once "$path";
+            }
+            else
+            {
+                if ($throw)
+                {
+                    throw new Exceptions\DirectoryWalker\FileNotFoundException(
+                        'File not found for require "' . $path . '"'
+                    );
+                }
+            }
+            
+            return $this;
+        }
     }
 }
