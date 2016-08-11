@@ -3,17 +3,34 @@
 namespace Zver
 {
     
+    /**
+     * Class DirectoryWalker helps to walk from directories, include files
+     *
+     * @package Zver
+     */
     class DirectoryWalker
     {
         
         protected $origin = null;
         protected $path = [];
         
+        /**
+         * Get directory separator
+         *
+         * @return string
+         */
         protected function getDirectorySeparator()
         {
             return DIRECTORY_SEPARATOR;
         }
         
+        /**
+         * Move into upper folder (parent) of current walked directory
+         *
+         * @param int $times
+         *
+         * @return $this
+         */
         public function up($times = 1)
         {
             for ($i = 0; $i < $times; $i++)
@@ -24,6 +41,13 @@ namespace Zver
             return $this;
         }
         
+        /**
+         * Walk into directory or directories
+         *
+         * @param $directory
+         *
+         * @return $this
+         */
         public function enter($directory)
         {
             $directories = explode('\/', $directory);
@@ -39,11 +63,19 @@ namespace Zver
             return $this;
         }
         
+        /**
+         * DirectoryWalker constructor.
+         */
         protected function __construct()
         {
             
         }
         
+        /**
+         * Start walking from function call directory
+         *
+         * @return static
+         */
         public static function fromCurrent()
         {
             $walker = new static();
@@ -59,6 +91,11 @@ namespace Zver
             
         }
         
+        /**
+         * Get current walked path
+         *
+         * @return string
+         */
         public function get()
         {
             $directorySeparator = $this->getDirectorySeparator();
@@ -73,6 +110,16 @@ namespace Zver
             return realpath($path) . $directorySeparator;
         }
         
+        /**
+         * Include a file in current walking directory.
+         *
+         * @param   string $file  File to require
+         * @param bool     $throw If this argument is true and file not exists
+         *                        \Zver\Exceptions\DirectoryWalker\FileNotFoundException will raised
+         *
+         * @return $this
+         * @throws \Zver\Exceptions\DirectoryWalker\FileNotFoundException
+         */
         public function includeFile($file, $throw = false)
         {
             $path = $this->get() . $file;
@@ -94,6 +141,16 @@ namespace Zver
             return $this;
         }
         
+        /**
+         * Require a file in current walking directory.
+         *
+         * @param   string $file  File to require
+         * @param bool     $throw If this argument is true and file not exists
+         *                        \Zver\Exceptions\DirectoryWalker\FileNotFoundException will raised
+         *
+         * @return $this
+         * @throws \Zver\Exceptions\DirectoryWalker\FileNotFoundException
+         */
         public function requireFile($file, $throw = false)
         {
             $path = $this->get() . $file;
