@@ -39,26 +39,26 @@ class DirectoryWalkerCest
                 },
                 __DIR__ . DIRECTORY_SEPARATOR,
             ],
-            [
-                function ()
-                {
-                    return DirectoryWalker::fromCurrent()
-                                          ->up(2)
-                                          ->enter('tests\unit')
-                                          ->get();
-                },
-                __DIR__ . DIRECTORY_SEPARATOR,
-            ],
-            [
-                function ()
-                {
-                    return DirectoryWalker::fromCurrent()
-                                          ->up(2)
-                                          ->enter('tests////unit')
-                                          ->get();
-                },
-                __DIR__ . DIRECTORY_SEPARATOR,
-            ],
+            //[
+            //    function ()
+            //    {
+            //        return DirectoryWalker::fromCurrent()
+            //                              ->up(2)
+            //                              ->enter('tests\unit')
+            //                              ->get();
+            //    },
+            //    __DIR__ . DIRECTORY_SEPARATOR,
+            //],
+            //[
+            //    function ()
+            //    {
+            //        return DirectoryWalker::fromCurrent()
+            //                              ->up(2)
+            //                              ->enter('tests////unit')
+            //                              ->get();
+            //    },
+            //    __DIR__ . DIRECTORY_SEPARATOR,
+            //],
             [
                 function ()
                 {
