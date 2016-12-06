@@ -14,19 +14,3 @@ $path=DirectoryWalker::fromCurrent()
                                     ->get();
 ?>
 ```
-
-[Documentation](https://s4urp8n.github.io/directory-walker/index.html)
-
-```
-
-Code Coverage Report:     
-  2016-08-11 23:56:03     
-                          
- Summary:                 
-  Classes: 100.00% (2/2)  
-  Methods: 100.00% (8/8)  
-  Lines:   100.00% (48/48)
-
-\Zver::DirectoryWalker
-  Methods: 100.00% ( 8/ 8)   Lines: 100.00% ( 48/ 48)
-```
