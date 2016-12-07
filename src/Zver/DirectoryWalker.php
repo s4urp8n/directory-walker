@@ -67,6 +67,15 @@ namespace Zver
                 $this->up();
             }
             
+            /**
+             * If UNIX root
+             */
+            if ($this->getDeepestDirectory() != $directory && $this->getPartsNumber() == 1 && strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
+            {
+                $this->path = [];
+                $this->origin = DIRECTORY_SEPARATOR;
+            }
+            
             return $this;
         }
         
