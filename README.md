@@ -9,7 +9,7 @@ curent dir is **/project**
 
 ```php
 <?php
-$path=DirectoryWalker::fromCurrent()
+$path=DirectoryWalker::fromCurRErent()
                      ->enter('tests')          //  /project/tests/
                      ->enter('unit/subunit\\') //  /project/tests/unit/subunit/
                      ->up()                    //  /project/tests/unit/
