@@ -5,123 +5,89 @@ use Zver\DirectoryWalker;
 class DirectoryWalkerTest extends PHPUnit\Framework\TestCase
 {
     
+    use \Package\Test;
+    
     public function testGet()
     {
         
-        $testData = [
+        $this->foreachSame(
             [
-                function ()
-                {
-                    return DirectoryWalker::fromCurrent()
-                                          ->get();
-                },
-                __DIR__ . DIRECTORY_SEPARATOR,
-            ],
-            [
-                function ()
-                {
-                    return DirectoryWalker::fromCurrent()
-                                          ->enter('classes')
-                                          ->enter('Package')
-                                          ->up()
-                                          ->up()
-                                          ->get();
-                },
-                __DIR__ . DIRECTORY_SEPARATOR,
-            ],
-            [
-                function ()
-                {
-                    return DirectoryWalker::fromCurrent()
-                                          ->enter('classes\Package')
-                                          ->up(2)
-                                          ->get();
-                },
-                __DIR__ . DIRECTORY_SEPARATOR,
-            ],
-            [
-                function ()
-                {
-                    return DirectoryWalker::fromCurrent()
-                                          ->enter('classes\\Package')
-                                          ->up(2)
-                                          ->get();
-                },
-                __DIR__ . DIRECTORY_SEPARATOR,
-            ],
-            [
-                function ()
-                {
-                    return DirectoryWalker::fromCurrent()
-                                          ->enter('classes/Package')
-                                          ->up(2)
-                                          ->get();
-                },
-                __DIR__ . DIRECTORY_SEPARATOR,
-            ],
-            [
-                function ()
-                {
-                    return DirectoryWalker::fromCurrent()
-                                          ->enter('classes//Package')
-                                          ->up(2)
-                                          ->get();
-                },
-                __DIR__ . DIRECTORY_SEPARATOR,
-            ],
-            [
-                function ()
-                {
-                    return DirectoryWalker::fromCurrent()
-                                          ->enter('./classes/./Package')
-                                          ->up(2)
-                                          ->get();
-                },
-                __DIR__ . DIRECTORY_SEPARATOR,
-            ],
-            [
-                function ()
-                {
-                    return DirectoryWalker::fromCurrent()
-                                          ->enter('./')
-                                          ->get();
-                },
-                __DIR__ . DIRECTORY_SEPARATOR,
-            ],
-            [
-                function ()
-                {
-                    return DirectoryWalker::fromCurrent()
-                                          ->enter('.')
-                                          ->get();
-                },
-                __DIR__ . DIRECTORY_SEPARATOR,
-            ],
-            [
-                function ()
-                {
-                    return DirectoryWalker::fromCurrent()
-                                          ->enter('///classes\\\\///////Package\\\\')
-                                          ->up(2)
-                                          ->get();
-                },
-                __DIR__ . DIRECTORY_SEPARATOR,
-            ],
-            [
-                function ()
-                {
-                    return DirectoryWalker::fromCurrent()
-                                          ->enter('someDir')
-                                          ->get();
-                },
-                __DIR__ . DIRECTORY_SEPARATOR . "someDir" . DIRECTORY_SEPARATOR,
-            ],
-        ];
-        
-        foreach ($testData as $data)
-        {
-            $this->assertSame($data[0](), $data[1]);
-        }
+                [
+                    DirectoryWalker::fromCurrent()
+                                   ->get(),
+                    __DIR__ . DIRECTORY_SEPARATOR,
+                ],
+                [
+                    DirectoryWalker::fromCurrent()
+                                   ->enter('classes')
+                                   ->enter('Package')
+                                   ->up()
+                                   ->up()
+                                   ->get(),
+                    __DIR__ . DIRECTORY_SEPARATOR,
+                ],
+                [
+                    DirectoryWalker::fromCurrent()
+                                   ->enter('classes\Package')
+                                   ->up(2)
+                                   ->get(),
+                    __DIR__ . DIRECTORY_SEPARATOR,
+                ],
+                [
+                    DirectoryWalker::fromCurrent()
+                                   ->enter('classes\\Package')
+                                   ->up(2)
+                                   ->get(),
+                    __DIR__ . DIRECTORY_SEPARATOR,
+                ],
+                [
+                    DirectoryWalker::fromCurrent()
+                                   ->enter('classes/Package')
+                                   ->up(2)
+                                   ->get(),
+                    __DIR__ . DIRECTORY_SEPARATOR,
+                ],
+                [
+                    DirectoryWalker::fromCurrent()
+                                   ->enter('classes//Package')
+                                   ->up(2)
+                                   ->get(),
+                    __DIR__ . DIRECTORY_SEPARATOR,
+                ],
+                [
+                    DirectoryWalker::fromCurrent()
+                                   ->enter('./classes/./Package')
+                                   ->up(2)
+                                   ->get(),
+                    __DIR__ . DIRECTORY_SEPARATOR,
+                ],
+                [
+                    DirectoryWalker::fromCurrent()
+                                   ->enter('./')
+                                   ->get(),
+                    __DIR__ . DIRECTORY_SEPARATOR,
+                ],
+                [
+                    DirectoryWalker::fromCurrent()
+                                   ->enter('.')
+                                   ->get(),
+                    __DIR__ . DIRECTORY_SEPARATOR,
+                ],
+                [
+                    DirectoryWalker::fromCurrent()
+                                   ->enter('///classes\\\\///////Package\\\\')
+                                   ->up(2)
+                                   ->get(),
+                    __DIR__ . DIRECTORY_SEPARATOR,
+                ],
+                [
+                    DirectoryWalker::fromCurrent()
+                                   ->enter('someDir')
+                                   ->get(),
+                    __DIR__ . DIRECTORY_SEPARATOR . "someDir" . DIRECTORY_SEPARATOR,
+                ],
+            ]
+        );
         
     }
     
@@ -146,7 +112,39 @@ class DirectoryWalkerTest extends PHPUnit\Framework\TestCase
         {
             rmdir($path->get());
         }
-        
+    }
+    
+    public function testUpTo()
+    {
+        $this->foreachSame(
+            [
+                [
+                    DirectoryWalker::fromCurrent()
+                                   ->enter('classes')
+                                   ->enter('Package')
+                                   ->upUntil('tests')
+                                   ->get(),
+                    __DIR__ . DIRECTORY_SEPARATOR,
+                ],
+                [
+                    DirectoryWalker::fromCurrent()
+                                   ->upUntil('tests')
+                                   ->get(),
+                    __DIR__ . DIRECTORY_SEPARATOR,
+                ],
+                [
+                    /**
+                     * up to root directory
+                     */
+                    DirectoryWalker::fromCurrent()
+                                   ->up()
+                                   ->enter('src')
+                                   ->upUntil('tests')
+                                   ->get(),
+                    explode(DIRECTORY_SEPARATOR, __DIR__)[0] . DIRECTORY_SEPARATOR,
+                ],
+            ]
+        );
     }
     
 }

@@ -17,16 +17,6 @@ namespace Zver
         protected static $currentDir = '.';
         
         /**
-         * Get directory separator
-         *
-         * @return string
-         */
-        protected function getDirectorySeparator()
-        {
-            return DIRECTORY_SEPARATOR;
-        }
-        
-        /**
          * Move into upper folder (parent) of current walked directory
          *
          * @param int $times
@@ -44,6 +34,61 @@ namespace Zver
         }
         
         /**
+         * Get deepest (last) directory name
+         *
+         * @return mixed
+         */
+        protected function getDeepestDirectory()
+        {
+            return ArrayHelper::load($this->explodeParts($this->get()))
+                              ->getLastValue();
+        }
+        
+        /**
+         * Get number of parts in current path
+         *
+         * @return int
+         */
+        protected function getPartsNumber()
+        {
+            return ArrayHelper::load($this->explodeParts($this->get()))
+                              ->count();
+        }
+        
+        /**
+         * Go up while reaching certain directory
+         *
+         * @param null $directory
+         */
+        public function upUntil($directory)
+        {
+            while ($this->getDeepestDirectory() != $directory && $this->getPartsNumber() > 1)
+            {
+                $this->up();
+            }
+            
+            return $this;
+        }
+        
+        /**
+         * Return array of path directories
+         *
+         * @param $path
+         *
+         * @return array
+         */
+        protected function explodeParts($path)
+        {
+            return array_filter(
+                explode(
+                    '/', StringHelper::load($path)
+                                     ->replace(preg_quote('\\'), preg_quote('/'))
+                                     ->get()
+                )
+            );
+        }
+        
+        /**
          * Walk into directory or directories
          *
          * @param $directory
@@ -52,11 +97,7 @@ namespace Zver
          */
         public function enter($directory)
         {
-            $directories = explode(
-                '/', StringHelper::load($directory)
-                                 ->replace(preg_quote('\\'), preg_quote('/'))
-                                 ->get()
-            );
+            $directories = $this->explodeParts($directory);
             
             foreach ($directories as $dir)
             {
@@ -143,15 +184,14 @@ namespace Zver
          */
         public function get()
         {
-            $directorySeparator = $this->getDirectorySeparator();
             
-            $path = array_merge(explode($directorySeparator, $this->origin), $this->path);
+            $path = array_merge(explode(DIRECTORY_SEPARATOR, $this->origin), $this->path);
             
-            $path = implode($directorySeparator, $this->resolve($path));
+            $path = implode(DIRECTORY_SEPARATOR, $this->resolve($path));
             
-            if ($path != $directorySeparator)
+            if ($path != DIRECTORY_SEPARATOR)
             {
-                $path .= $directorySeparator;
+                $path .= DIRECTORY_SEPARATOR;
             }
             
             return $path;
