@@ -4,12 +4,12 @@ use Zver\DirectoryWalker;
 
 class DirectoryWalkerTest extends PHPUnit\Framework\TestCase
 {
-    
+
     use \Package\Test;
-    
+
     public function testGet()
     {
-        
+
         $this->foreachSame(
             [
                 [
@@ -88,32 +88,30 @@ class DirectoryWalkerTest extends PHPUnit\Framework\TestCase
                 ],
             ]
         );
-        
+
     }
-    
+
     public function testCreateAndGet()
     {
         $dirName = 'fsdavchsfewf';
         $path = DirectoryWalker::fromCurrent()
                                ->enter($dirName);
-        
-        if (file_exists($path->get()))
-        {
+
+        if (file_exists($path->get())) {
             rmdir($path->get());
         }
-        
+
         $this->assertFalse(file_exists($path->get()));
-        
+
         $path->createAndGet();
-        
+
         $this->assertTrue(file_exists($path->get()));
-        
-        if (file_exists($path->get()))
-        {
+
+        if (file_exists($path->get())) {
             rmdir($path->get());
         }
     }
-    
+
     public function testUpTo()
     {
         $this->foreachSame(
@@ -146,5 +144,5 @@ class DirectoryWalkerTest extends PHPUnit\Framework\TestCase
             ]
         );
     }
-    
+
 }
