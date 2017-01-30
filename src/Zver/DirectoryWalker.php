@@ -184,7 +184,6 @@ class DirectoryWalker
      */
     public function get()
     {
-
         $path = array_merge(explode(DIRECTORY_SEPARATOR, $this->origin), $this->path);
 
         $path = implode(DIRECTORY_SEPARATOR, $this->resolve($path));
