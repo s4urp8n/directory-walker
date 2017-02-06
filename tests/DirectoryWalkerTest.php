@@ -91,6 +91,24 @@ class DirectoryWalkerTest extends PHPUnit\Framework\TestCase
 
     }
 
+    public function testRealFiles()
+    {
+        $realTests = [
+            "files/test.php",
+            "classes/test2.php",
+            "classes/Package/test3.php",
+        ];
+
+        foreach ($realTests as $test) {
+            $this->foreachSame([
+                                   [
+                                       realpath(include $test),
+                                       dirname(realpath(__DIR__ . DIRECTORY_SEPARATOR . $test)),
+                                   ],
+                               ]);
+        }
+    }
+
     public function testCreateAndGet()
     {
         $dirName = 'fsdavchsfewf';
