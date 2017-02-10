@@ -5,7 +5,7 @@ use Zver\DirectoryWalker;
 class DirectoryWalkerTest extends PHPUnit\Framework\TestCase
 {
 
-    use \Package\Test;
+    use \Zver\Package\Test;
 
     public function testGet()
     {

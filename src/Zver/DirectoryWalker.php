@@ -38,8 +38,11 @@ class DirectoryWalker
      */
     protected function getDeepestDirectory()
     {
-        return ArrayHelper::load($this->explodeParts($this->get()))
-                          ->getLastValue();
+        $parts = $this->explodeParts($this->get());
+
+        $lastKey = array_reverse(array_keys($parts))[0];
+
+        return $parts[$lastKey];
     }
 
     /**
@@ -49,8 +52,7 @@ class DirectoryWalker
      */
     protected function getPartsNumber()
     {
-        return ArrayHelper::load($this->explodeParts($this->get()))
-                          ->count();
+        return count($this->explodeParts($this->get()));
     }
 
     /**
@@ -84,13 +86,7 @@ class DirectoryWalker
      */
     protected function explodeParts($path)
     {
-        return array_filter(
-            explode(
-                '/', StringHelper::load($path)
-                                 ->replace(preg_quote('\\'), preg_quote('/'))
-                                 ->get()
-            )
-        );
+        return array_filter(explode('/', mb_eregi_replace(preg_quote('\\'), preg_quote('/'), $path)));
     }
 
     /**
@@ -122,13 +118,9 @@ class DirectoryWalker
     {
         $walker = new static();
 
-        $lastCalledFile = ArrayHelper::load(debug_backtrace())
-                                     ->getFirstValue()['file'];
+        $lastCalledFile = array_values(debug_backtrace())[0]['file'];
 
-        $walker->origin = StringHelper::load(dirname($lastCalledFile))
-                                      ->removeEnding('/')
-                                      ->removeEnding('\\')
-                                      ->get();
+        $walker->origin = dirname($lastCalledFile);
 
         return $walker;
     }
