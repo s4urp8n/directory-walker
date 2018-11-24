@@ -69,7 +69,8 @@ class DirectoryWalker
         /**
          * If UNIX root
          */
-        if ($this->getDeepestDirectory() != $directory && $this->getPartsNumber() == 1 && strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
+        if ($this->getDeepestDirectory() != $directory && $this->getPartsNumber() == 1 && strtoupper(substr(PHP_OS, 0,
+                                                                                                            3)) !== 'WIN') {
             $this->path = [];
             $this->origin = DIRECTORY_SEPARATOR;
         }
@@ -174,7 +175,7 @@ class DirectoryWalker
      *
      * @return string
      */
-    public function get()
+    public function get($filename = '')
     {
         $path = array_merge(explode(DIRECTORY_SEPARATOR, $this->origin), $this->path);
 
@@ -184,7 +185,7 @@ class DirectoryWalker
             $path .= DIRECTORY_SEPARATOR;
         }
 
-        return $path;
+        return $path . $filename;
     }
 
     public function createAndGet($mode = 0777)
