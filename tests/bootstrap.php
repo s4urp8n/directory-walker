@@ -10,12 +10,6 @@ if (file_exists($composerFile)) {
     include_once($composerFile);
 }
 
-/**
- * Package autoload
- */
-\Zver\Common::registerAutoloadClassesFrom($srcDirectory);
-\Zver\Common::registerAutoloadClassesFrom($classesDirectory);
-
 //Functions file autoload
 $functionsFile = $srcDirectory . 'Functions.php';
 if (file_exists($functionsFile)) {
