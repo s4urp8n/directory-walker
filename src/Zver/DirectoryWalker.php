@@ -10,9 +10,9 @@ namespace Zver;
 class DirectoryWalker
 {
 
-    protected $origin = null;
-    protected $path = [];
-    protected static $parentDir = '..';
+    protected        $origin     = null;
+    protected        $path       = [];
+    protected static $parentDir  = '..';
     protected static $currentDir = '.';
 
     /**
@@ -58,7 +58,8 @@ class DirectoryWalker
     /**
      * Go up while reaching certain directory
      *
-     * @param null $directory
+     * @param string $directory
+     * @return \Zver\DirectoryWalker
      */
     public function upUntil($directory)
     {
@@ -173,6 +174,7 @@ class DirectoryWalker
     /**
      * Get current walked path
      *
+     * @param string $filename
      * @return string
      */
     public function get($filename = '')
@@ -188,6 +190,10 @@ class DirectoryWalker
         return $path . $filename;
     }
 
+    /**
+     * @param int $mode
+     * @return string
+     */
     public function createAndGet($mode = 0777)
     {
         $path = $this->get();
