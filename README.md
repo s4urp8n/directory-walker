@@ -1,4 +1,4 @@
-    
+[![Build Status](https://travis-ci.org/s4urp8n/directory-walker.svg?branch=master)](https://travis-ci.org/s4urp8n/directory-walker)
 # Directory walker
 
 This package helps you walk paths from current directory
