@@ -19,7 +19,7 @@
     }
   },
   "require": {
-    "phpunit/phpunit": "8.5.x-dev"
+    "phpunit/phpunit": "*"
   },
   "require-dev": {
   }
